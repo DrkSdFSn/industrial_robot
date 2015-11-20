@@ -1,4 +1,4 @@
-from gks import count_unique, count_diff, matrix_output, grouped, gks3
+from gks import count_unique, count_diff, matrix_output, grouped, gks3, unique_module
 from gks4 import draw_graph_create_module
 from os import stat, path
 from sys import argv
@@ -33,6 +33,7 @@ specify_group = gks3(mg, p)
 module = {}
 for i in specify_group.keys():
 	module[i] = draw_graph_create_module(p, specify_group[i], 'group'+str(i))
+un_mod = unique_module(module)
 
 print('\nВыходные данные:\n', m, sep='')
 print('\nГруппы:')
@@ -43,5 +44,8 @@ for i in specify_group.items():
 	print(i[0], 'group:', i[1])
 print('\nМодули:')
 for i in module.items():
+	print(i[0], 'group:', i[1])
+print('\nУникальные модули:')
+for i in un_mod.items():
 	print(i[0], 'group:', i[1])
 input("\nДля выхода нажмите любую клавишу")

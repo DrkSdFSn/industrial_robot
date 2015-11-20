@@ -114,6 +114,40 @@ def gks3(input_data, matr):
 	x.sort(key=sortByLength, reverse=True)
 	l = {x.index(i)+1:i for i in x}
 	return(l)
+
+def unique_module(module):
+	list_operations = []
+	trash = []
+	for i in module.values():
+		for j in i.values():
+			list_operations.append(j)
+	for i in list_operations:
+		for j in list_operations:
+			if i == j:
+				continue
+			if i.issubset(j) and i not in trash:
+				trash.append(i)
+	for i in trash:
+		list_operations.remove(i)
+	list_operations.sort()
+	for i in list_operations:
+		for j in list_operations:
+			if i == j or len(j) > len(i):
+				continue
+			for u in j:
+				if u in i:
+					i.remove(u)
+	trash.clear()
+	for i in list_operations:
+		if i not in trash:
+			trash.append(i)
+	un_mod = {}
+	incr = 1
+	for i in trash:
+		key = 'M' + str(incr)
+		un_mod[key] = i
+		incr += 1
+	return un_mod
 	
 if __name__ == '__main__':
 		print("GKS.py")
