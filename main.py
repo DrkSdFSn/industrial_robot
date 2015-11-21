@@ -47,5 +47,5 @@ for i in module.items():
 	print(i[0], 'group:', i[1])
 print('\nУникальные модули:')
 for i in un_mod.items():
-	print(i[0], 'group:', i[1])
+	print(i[0], ':', i[1])
 input("\nДля выхода нажмите любую клавишу")

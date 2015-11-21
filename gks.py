@@ -1,4 +1,5 @@
 from numpy import int16, zeros, amax
+from copy import deepcopy
 
 #подсчет количества уникальных операций
 def count_unique(matrix):
@@ -115,12 +116,18 @@ def gks3(input_data, matr):
 	l = {x.index(i)+1:i for i in x}
 	return(l)
 
-def unique_module(module):
+def unique_module(m):
+	module = deepcopy(m)
 	list_operations = []
-	trash = []
 	for i in module.values():
 		for j in i.values():
 			list_operations.append(j)
+	trash = deepcopy(list_operations)
+	list_operations.clear()
+	for i in trash:
+		if i not in list_operations:
+			list_operations.append(i)
+	trash.clear()
 	for i in list_operations:
 		for j in list_operations:
 			if i == j:
