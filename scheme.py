@@ -1,7 +1,7 @@
 from graphviz import Digraph
 from os import stat, path
 from sys import argv
-def lab_6_7(x, module):
+def create_scheme(x, module):
 	def func1(m, f1, f2, di, ind):
 		edge_l = ''
 		edge_f = ''

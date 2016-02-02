@@ -1,6 +1,6 @@
 from gks import count_unique, count_diff, matrix_output, grouped, gks3, unique_module
 from gks4 import draw_graph_create_module
-from outline import lab_6_7
+from scheme import create_scheme
 from os import stat, path
 from sys import argv
 from copy import deepcopy
@@ -63,5 +63,5 @@ print('\nRefined modules:')
 for i in un_mod.items():
 	print('\t', i[0], ':', i[1])
 	
-lab_6_7(matrix_opr, un_mod)
+create_scheme(matrix_opr, un_mod)
 input("\nTo exit, press any key")
