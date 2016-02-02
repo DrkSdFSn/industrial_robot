@@ -61,7 +61,7 @@ def create_scheme(x, module):
 	for i in edges.items():
 		m_m = i[0].split(',')
 		dot.edge(m_m[0], m_m[1], str(list(i[1])))
-	dot.render(str(path.realpath(path.dirname(argv[0]))) + '/shemes/' + 'img1')
+	dot.render(str(path.realpath(path.dirname(argv[0]))) + '/schemes/' + 'img1')
 
 	'''dot = Digraph(comment='Strucsds', format='pdf')
 	for i in module.items():
