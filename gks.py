@@ -1,16 +1,17 @@
 from numpy import int16, zeros, amax
 from copy import deepcopy
 
-#подсчет количества уникальных операций
+#count the number of unique operations
 def count_unique(matrix):
 	str_matrix_unique_elements = ''
 	for i in range(len(matrix)):
 		for j in range(len(matrix[i])):
 			if not matrix[i][j] in str_matrix_unique_elements:
 				str_matrix_unique_elements = str_matrix_unique_elements + matrix[i][j]
-	return int(len(str_matrix_unique_elements)/2)
+	#return int(len(str_matrix_unique_elements)/2)
+	return str_matrix_unique_elements
 	
-#подсчет не встречающихся операций в строках 
+#counting operations are not found in lines
 def  count_diff(matrix, K, len_matrix):
 	res_list = []
 	res_dict = {}
@@ -23,7 +24,7 @@ def  count_diff(matrix, K, len_matrix):
 			res_dict.update(i)
 	return res_dict
 
-#форматированние вывода в виде квадратичной матрицы
+#output formatting as a square matrix
 def matrix_output(matrix, len_matrix):
 	result_matrix = zeros((len_matrix,len_matrix), dtype=int16)
 	for i in range(len_matrix):
@@ -33,7 +34,7 @@ def matrix_output(matrix, len_matrix):
 				result_matrix[j, i] = matrix[(i, j)]
 	return result_matrix
 
-#составление групп
+#drafting groups
 def grouped(matrix):
 	result_group = set()
 	condition_group = set()
@@ -47,7 +48,7 @@ def grouped(matrix):
 		position = []
 		result_group.clear()
 		max_elem = amax(matrix)
-		for i in range(len(matrix)): #находим индексы всех макс элементов
+		for i in range(len(matrix)): #find the indices of all elements max
 			for j in range(len(matrix)):
 				if matrix[i][j] == max_elem:
 					position.append((i,j))
@@ -58,16 +59,16 @@ def grouped(matrix):
 		if len(position) > 1:
 			for i in range(len(position) - 1):
 				i += 1
-				if not result_group.isdisjoint(set(position[i])) and result_group.isdisjoint(condition_group):  #записуем другие индексы на пересечение первых индексов
+				if not result_group.isdisjoint(set(position[i])) and result_group.isdisjoint(condition_group):  #write the other indexes at the first intersection indices
 					result_group.update(set(position[i]))
 					matrix[position[i][0]][position[i][1]] = 0
 		if len(result_group.difference(condition_group)) != 0:
-			x.append(result_group.difference(condition_group)) #добавляем всю группу в список групп
+			x.append(result_group.difference(condition_group)) #add the entire group to the list of groups
 		condition_group.update(result_group)
 	l = {x.index(i)+1:i for i in x}
 	return(l)
 
-#3 лабораторная, изменение групп
+#refined groups
 def gks3(input_data, matr):
 	def sortByLength(inputStr):
 		return len(inputStr)
@@ -86,7 +87,6 @@ def gks3(input_data, matr):
 			str_bush = str_bush[:-1]
 			list_res.append(str_bush.split(','))
 		list_res.sort(key=sortByLength, reverse=True)
-		#print(list_res)
 		str_chk = ''
 		for i in range(len(list_res)):
 			for j in range(len(list_res)):
@@ -114,8 +114,9 @@ def gks3(input_data, matr):
 	x = list(input_data.values())
 	x.sort(key=sortByLength, reverse=True)
 	l = {x.index(i)+1:i for i in x}
-	return(l)
+	return l
 
+#drafting refined modules
 def unique_module(m):
 	module = deepcopy(m)
 	list_operations = []

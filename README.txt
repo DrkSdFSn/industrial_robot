@@ -1,22 +1,19 @@
-﻿ГКС - лабораторный практикум
+﻿Development of structural and technological scheme of industrial robot
 
-Требование для запуска программы:
+The requirement to run the program:
 Python 3 https://www.python.org/downloads/
-библиотека NumPy for Python 3 http://sourceforge.net/projects/numpy/files/NumPy/1.9.2/
-библиотека Graphviz
+library NumPy for Python 3 http://sourceforge.net/projects/numpy/files/NumPy/1.9.2/
+library Graphviz
 
-Содержимое программы:
-gks.py
-gks4.py
-main.py
-matrix.txt
-все файлы должны находится в одном каталоге
+The contents of the program:
+    gks.py
+    gks4.py
+    main.py
+    matrix.txt
+    scheme.py
 
-Запускать файл main.py, если файл matrix.txt пустой, 
-программа предложит ввести входные данные в командной строке.
-
-Пример вызова программы для первой лабораторной: 
-Входные данные:
+Example program call for the construction of a square matrix: 
+Input data:
 Т1 Ф1 Ф2 Т2 С1 С2 Ф3 Т3 Т2 Т4 С1 Ф1 С2 Р2
 Т3 Т2 С1 С2 Ф1 Р2 Т1 Т3 Т2 Т4 С2 Р2
 Т4 Т3 Т2 С1 С2 Ф1 Т5 Т1 Т3 Т2 Т4
@@ -25,7 +22,7 @@ matrix.txt
 Т3 Т4 Ф2 Р2 Т2 С1 С2 Т1 С1 Ф1 Т3 Т2 Т4
 Т2 С1 С2 Т4 Т3 Т2 Т4 С2 Р2
 
-Выходные данные:
+Output matrix:
 [[ 0  9  7 10  8 10  7]
  [ 9  0  9 10 10 10  9]
  [ 7  9  0  8  8  8  7]

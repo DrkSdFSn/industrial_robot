@@ -2,7 +2,7 @@ from graphviz import Digraph
 from os import stat, path
 from sys import argv
 
-def group_unique_oper(matrix): #нахождение уникальных элементов
+def group_unique_oper(matrix): #finding unique items
 	str_matrix_unique_elements = []
 	for i in range(len(matrix)):
 		for j in range(len(matrix[i])):
@@ -10,7 +10,7 @@ def group_unique_oper(matrix): #нахождение уникальных эле
 				str_matrix_unique_elements.append(matrix[i][j])
 	return str_matrix_unique_elements
 
-def update_path(res_group, paths): #обновление графа
+def update_path(res_group, paths): #update graph
 	cash_dollars = set()
 	for i in res_group.keys():
 		for k in res_group[i]:
@@ -27,7 +27,7 @@ def update_path(res_group, paths): #обновление графа
 					paths[j].add(i)
 	return paths
 
-def create_graph(matrix, group): #построение графа 
+def create_graph(matrix, group): #Graphing
 	current_matrix = []
 	for i in group:
 		current_matrix.append(matrix[i])
@@ -38,7 +38,7 @@ def create_graph(matrix, group): #построение графа
 			module_dict[matrix[i][elem]].add(matrix[i][elem + 1])
 	return module_dict, unique_elements
 	
-def create_module(module_dict, elements, finally_module, counter): #создание модуля, вносим туда операции, из графа удаляем
+def create_module(module_dict, elements, finally_module, counter): #create a module, add the operation, remove from the graph
 	for i in elements:
 		key = 'M'+str(counter)
 		module_dict[key] = module_dict[i]
@@ -66,14 +66,17 @@ def chn_crt_module(module_dict, current, finally_module, counter): # созда�
 		if not key in finally_module:
 			finally_module[key] = set()
 		for j in i:
-			module_dict[key].update(module_dict[j])
-			finally_module[key].update({j})
-			module_dict.pop(j)
+			try:
+				module_dict[key].update(module_dict[j])
+				finally_module[key].update({j})
+				module_dict.pop(j)
+			except:
+				continue
 		if not trash:
 			counter += 1
 	return module_dict, finally_module, counter
 
-def output_links(module_dict): #элементы у которых только выходные связи
+def output_links(module_dict): #elements in which only the output connection
 	current_matrix = []
 	for i in module_dict.keys():
 		check = False
@@ -86,7 +89,7 @@ def output_links(module_dict): #элементы у которых только 
 			current_matrix.append(i)
 	return current_matrix
 
-def input_links(module_dict): #элементы у которых только входные связи
+def input_links(module_dict): #elements in which only input connection
 	current_matrix = []
 	for i in module_dict.keys():
 		if len(module_dict[i]) == 0:
@@ -111,7 +114,7 @@ def strong_links(module_dict): #a->b, b->a
 						current_matrix.append([i,j])
 	return current_matrix
 	
-def triple_links(value):
+def triple_links(value): #a->b, b->c
 	str_chk = ''
 	current = []
 	battlecry = []
@@ -176,7 +179,7 @@ def find_all_paths(graph, start, end, path=[]):
 					paths.append(newpath)
 	return paths
 	
-def outline(module): #находжение контуров 
+def outline(module): #finding the outlines
 	return_paths, current = [], []
 	for i in module.keys():
 		for j in module[i]:
@@ -193,7 +196,10 @@ def outline(module): #находжение контуров
 			if i == j:
 				continue
 			if not set(i).isdisjoint(set(j)) and len(i) < len(j):
-				return_paths.remove(i)
+				try:
+					return_paths.remove(i)
+				except: 
+					continue
 	current = return_paths[:]
 	for i in current:
 		if len(i) < 3:
@@ -220,7 +226,7 @@ def distant_branch(module): #5 x->a->b->c->y x->y
 			paths.remove(i)
 	return paths
 
-def find_input(module, element): # эллемент который имеет только один вход и  один выход
+def find_input(module, element): # an element that has only one input and one output
 	trash = []
 	for i in module.keys():
 		if i == element:
@@ -232,7 +238,7 @@ def find_input(module, element): # эллемент который имеет т
 		return False
 	return True
 
-def find_all_paths_bool(graph, start, end, path=[], dsb = False): #найти цепочку между 2 операциями
+def find_all_paths_bool(graph, start, end, path=[], dsb = False): #find chain between 2 operations
 	path = path + [start]
 	if start == end:
 		return [path]
@@ -273,7 +279,7 @@ def draw_graph(module, namefile, iteration):
 	for i in module.keys():
 		for j in module[i]:
 			dot.edge(i, j)
-	dot.render(str(path.realpath(path.dirname(argv[0]))) + '/img/' + str(namefile) + '_iteration' + str(iteration))
+	dot.render(str(path.realpath(path.dirname(argv[0]))) + '/modules/' + str(namefile) + '_iteration' + str(iteration))
 	return iteration + 1
 
 def draw_graph_create_module(matrix, group, namefile_group):
