@@ -20,8 +20,6 @@ def create_scheme(x, module):
 		else:
 			di[edge].add(ind)
 		return di
-	#print(func1(module, 'f1', 't2', edges))
-	#func1(module, 'c1', 'c2', edges)
 
 	def func(matrix, module):
 		first_elem = []
@@ -33,16 +31,6 @@ def create_scheme(x, module):
 		second_elem = set(second_elem)
 		keys_in = 'M2'
 		keys_out = 'M1'
-		'''lens_in = len(first_elem.intersection(module[keys_in]))
-		print(lens_in)
-		lens_out = len(second_elem.intersection(module[keys_out]))
-		print(lens_out)
-		for i in module.keys():
-			if len(first_elem.intersection(module[i])) > lens_in:
-				keys_in = i
-			if len(second_elem.intersection(module[i])) > lens_out: #and keys_in != i:
-				keys_out = i'''
-		#print(module, 'keys_in', keys_in, 'keys_out', keys_out)
 		module['in' + keys_in] = module[keys_in]
 		module.pop(keys_in)
 		module['out' + keys_out] = module[keys_out]
@@ -62,11 +50,3 @@ def create_scheme(x, module):
 		m_m = i[0].split(',')
 		dot.edge(m_m[0], m_m[1], str(list(i[1])))
 	dot.render(str(path.realpath(path.dirname(argv[0]))) + '/schemes/' + 'img1')
-
-	'''dot = Digraph(comment='Strucsds', format='pdf')
-	for i in module.items():
-		dot.node(i[0]) #str(i[0]) + ':' + str(i[1]))
-	for i in edges.items():
-		m_m = i[0].split(',')
-		dot.edge(m_m[0], m_m[1])
-	dot.render(str(path.realpath(path.dirname(argv[0]))) + '/lab6/' + 'img2')'''
