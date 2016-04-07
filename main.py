@@ -1,5 +1,5 @@
 from gks import count_unique, count_diff, matrix_output, grouped, gks3, unique_module
-from gks4 import draw_graph_create_module
+from gksLab4 import draw_graph_create_module
 from scheme import create_scheme
 from os import stat, path
 from sys import argv
